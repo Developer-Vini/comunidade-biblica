@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.js';
 import postsRoutes from './routes/posts.js';
 import commentsRoutes from './routes/comments.js';
 import usersRoutes from './routes/users.js';
+import adminRoutes from './routes/admin.js';
 
 import './db/database.js';
 
@@ -73,6 +74,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/posts', postsRoutes);
 app.use('/api', commentsRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -84,6 +86,12 @@ app.get('/', (req, res) => {
   const indexPath = join(__dirname, '..', '..', 'index.html');
   res.sendFile(indexPath);
 });
+
+app.get('/admin', (req, res) => {
+  res.sendFile(join(__dirname, '..', '..', 'admin', 'index.html'));
+});
+
+app.use('/admin', express.static(join(__dirname, '..', '..', 'admin')));
 
 app.use('/api', (req, res) => {
   res.status(404).json({ success: false, error: 'Endpoint não encontrado' });
