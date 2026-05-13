@@ -1,0 +1,14 @@
+node_modules/
+backend/.env
+*.db
+
+.DS_Store
+Thumbs.db
+*.log
+
+.env.local
+.env.*.local
+
+
+*.tmp
+*.temp
